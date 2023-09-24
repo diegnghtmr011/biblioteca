@@ -41,7 +41,7 @@ public class BibliotecaTest {
     @Test
     public void datosNulos() {
         LOG.info("Inicio de prueba datos nulos...");
-        // Almacenar los datos de prueba null|null|null|null|24|0|0|null|LOCAL
+
         assertThrows(Throwable.class, () -> new Libro(null, null, null, null, 0, null, null));
 
         LOG.info("Fin de prueba datos nulos...");
@@ -53,7 +53,7 @@ public class BibliotecaTest {
     @Test
     public void numeroDePaginasNegativos() {
         LOG.info("Inicio de prueba número de paginas negativo...");
-        // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|-24|0|0|LOCAL
+
         assertThrows(Throwable.class, ()-> new Libro("50 sombras de Josué", new Autor("Daniel", "DeLuque", "Alemania"), "Obo quindiano", TipoGenero.NARRATIVO, -169, LocalDate.of(2023, 9, 03), "978-987-25620-2-1"));
         
         LOG.info("Fin de prueba número de paginas negativo...");
@@ -65,10 +65,24 @@ public class BibliotecaTest {
     @Test
     public void limiteCantidadLibrosNegativo() {
         LOG.info("Inicio de prueba limites de edades negativo...");
-        // Almacenar los datos de prueba Copa Mundo|2023-10-01|2023-08-01|2023-09-15|24|-1|0|LOCAL
+
         assertThrows(Throwable.class, ()-> new Biblioteca("Si pero No", -100));
         
         LOG.info("Fin de prueba  limites de edades negativo...");
     }
 
+    /**
+     * Prueba para verificar el registro de dos Libros iguales en una Biblioteca.
+     */
+    @Test
+    public void repetidoNombreEditorialTest() {
+        LOG.info("Inicio de prueba nombre y editorial repetidos...");
+        Biblioteca biblioteca = new Biblioteca("Bibliomania", 666);
+        var libro5 = new Libro("50 sombras de Josué", new Autor("Daniel", "DeLuque", "Alemania"), "Obo quindiano", TipoGenero.NARRATIVO, 123, LocalDate.of(2023, 9, 03), "978-987-25620-2-1");
+        var libro4 = new Libro("50 sombras de Josué", new Autor("Daniel", "DeLuque", "Alemania"), "Obo quindiano", TipoGenero.NARRATIVO, 123, LocalDate.of(2023, 9, 03), "978-987-25620-2-1");
+        biblioteca.registrarLibro(libro5);
+        assertThrows(Throwable.class, ()-> biblioteca.registrarLibro(libro4));
+        
+        LOG.info("Fin de prueba nombre y editorial repetidos...");
+    }
 }
