@@ -70,7 +70,7 @@ public class Biblioteca {
     public void validarLibroExistente(Libro libro) {
         boolean nombreLibroExistente = buscarlistaLibrosPorNombre(libro.getNombre()).isPresent();
         boolean editorialExistente = buscarlistaLibrosPorEditorial(libro.getEditorial()).isPresent();
-        assert !nombreLibroExistente && !editorialExistente : "El libro ya esta registrado";
+        assert !nombreLibroExistente || !editorialExistente : "El libro ya esta registrado";
     }
 
     /**
