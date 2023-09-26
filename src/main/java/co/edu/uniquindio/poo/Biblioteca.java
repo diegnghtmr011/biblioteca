@@ -18,14 +18,11 @@ import java.util.function.Predicate;
 public class Biblioteca {
     private final String nombreBiblioteca;
     private final Collection<Libro> listaLibros;
-    private static int numeroLibros;
     private final int limiteCantidadLibros;
 
     public Biblioteca(String nombreBiblioteca, int limiteCantidadLibros) {
-        assert numeroLibros >= 0;
         assert nombreBiblioteca != null && !nombreBiblioteca.isBlank() : "El nombre es requerido";
         assert limiteCantidadLibros > 0;
-        setIncrementarNumeroLibros();
         this.nombreBiblioteca = nombreBiblioteca;
         this.limiteCantidadLibros = limiteCantidadLibros;
         this.listaLibros = new LinkedList<Libro>();
@@ -39,16 +36,9 @@ public class Biblioteca {
         return Collections.unmodifiableCollection(listaLibros);
     }
 
-    public static int getNumeroLibros() {
-        return numeroLibros;
-    }
 
     public int getLimiteCantidadLibros() {
         return limiteCantidadLibros;
-    }
-
-    private static void setIncrementarNumeroLibros() {
-        numeroLibros++;
     }
 
     /**
